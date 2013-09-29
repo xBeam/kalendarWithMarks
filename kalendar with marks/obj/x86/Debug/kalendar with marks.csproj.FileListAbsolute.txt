@@ -1,0 +1,12 @@
+c:\users\руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.Properties.Resources.resources
+c:\users\руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\bin\Debug\kalendar with marks.exe
+c:\users\руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\bin\Debug\kalendar with marks.pdb
+c:\users\руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar with marks.exe
+c:\users\руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar with marks.pdb
+C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.Start.resources
+C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.DateObserver.resources
+C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.AddCateg.resources
+C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.DeleteCat.resources
