@@ -29,6 +29,7 @@ namespace kalendar_with_marks
             dateObs.Visible = true;
             dateObs.RenderTasks(e.End);
             //asdadsd
+            //Изменения
         }
 
         private void btnAddCateg_Click(object sender, EventArgs e)
