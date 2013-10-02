@@ -27,7 +27,7 @@ namespace kalendar_with_marks
             this.Visible = false;
             DateObserver dateObs = (DateObserver)Application.OpenForms["DateObserver"];
             dateObs.Visible = true;
-            //dateObs.RenderTasks(e.End);
+            dateObs.RenderTasks(e.End);
         }
 
         private void btnAddCateg_Click(object sender, EventArgs e)
