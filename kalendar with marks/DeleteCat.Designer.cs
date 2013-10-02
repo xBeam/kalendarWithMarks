@@ -37,7 +37,7 @@
             this.btnDelCat.Location = new System.Drawing.Point(359, 296);
             this.btnDelCat.Name = "btnDelCat";
             this.btnDelCat.Size = new System.Drawing.Size(122, 35);
-            this.btnDelCat.TabIndex = 12;
+            this.btnDelCat.TabIndex = 1;
             this.btnDelCat.Text = "Удалить выбранные категории";
             this.btnDelCat.UseVisualStyleBackColor = true;
             this.btnDelCat.Click += new System.EventHandler(this.btnDelCat_Click);
@@ -51,6 +51,7 @@
             // 
             // DeleteCat
             // 
+            this.AcceptButton = this.btnDelCat;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 360);

@@ -10,3 +10,5 @@ C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\
 C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.DateObserver.resources
 C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.AddCateg.resources
 C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.DeleteCat.resources
+F:\C#files\GitHub\kalendar with marks\obj\x86\Debug\kalendar with marks.exe
+F:\C#files\GitHub\kalendar with marks\obj\x86\Debug\kalendar with marks.pdb

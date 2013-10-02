@@ -16,34 +16,59 @@ namespace kalendar_with_marks
         public DateObserver()           
         {
             InitializeComponent();
+            Common.RenderCheckBox(pnObsCat);
         }
-
+        
+        public void Otrisovwik(string[] risCat)
+        {
+            Panel pn = ((Panel)this.Controls["pnObsCat"]);
+            Common.RenderCheckBox(pn);
+            pnObsCat.Refresh();
+        }
         //поле с выбранной датой
         public DateTime ChosenDate { get; set; }        
 
         //путь к файлу
-        public string Path { get; set; }        
+        public string Path { get; set; }  
+        
 
         //действие при сохранении
-        private void btnSave_Click(object sender, EventArgs e) 
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            if (File.Exists(Path))
+            Path = string.Format(@"f:\C#files\KalendarSaved{0}.txt", ChosenDate.ToShortDateString());
+            string[] categories = Common.GetCategoryList(Common.Path);
+            if (this.Controls != null)
             {
-                File.Delete(Path);
-            }
+                string[] ObserveList = new string[0];
+                Panel panel = (Panel)this.Controls["pnObsCat"];
+                if (pnObsCat != null)
+                {
+                    for (int i = 0; i < categories.Length; i++)
+                    {
+                        CheckBox chBox = ((CheckBox)panel.Controls[categories[i]]);
+                        if (File.Exists(Path))
+                        {
+                            File.Delete(Path);
+                        }
+                        using (FileStream fs = File.Create(Path))
+                        {
+                            bool key = new bool();
+                           
+                            for (int x = 0; x < categories.Length; x++)
+                            {
+                                if (chBox.Checked)
+                                    key = true;
+                                else
+                                    key = false;
+                                AddText(fs, categories[x] + "+" + key + ";");
+                            }
+                        }
+                    }
+                    MessageBox.Show("Успешно сохранено", "Сохранение...", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            using (FileStream fs = File.Create(Path))
-            {
-                AddText(fs, "1 - " + chbPhysEx.Checked.ToString());
-                AddText(fs, "\n2 - " + chbClean.Checked.ToString());
-                AddText(fs, "\n3 - " + chbProg.Checked.ToString());
-                AddText(fs, "\n4 - " + chbMeal.Checked.ToString());
-                AddText(fs, "\n5 - " + chbGame.Checked.ToString());
-                AddText(fs, "\n6 - " + chbEng.Checked.ToString());
+                }
             }
-            MessageBox.Show("Успешно сохранено", "Сохранение...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }       
-
+        }
         /// <summary>
         /// считывание информации по дате и ее отображение
         /// </summary>
@@ -53,30 +78,32 @@ namespace kalendar_with_marks
             ChosenDate = chosenDate;
             lblDate.Text = ChosenDate.ToShortDateString();
             Path = string.Format(@"f:\C#files\KalendarSaved{0}.txt", ChosenDate.ToShortDateString());
-            string[] values = null;
-            if (File.Exists(Path))
-            {
-                using (FileStream rd = new FileStream(Path, FileMode.Open))
-                {
-                    values = Reader(rd);
+        //    string[] values = null;
+        //    if (File.Exists(Path))
+        //    {
+        //        using (FileStream rd = new FileStream(Path, FileMode.Open))
+        //        {
+        //            values = Reader(rd);
+        //            Panel panel = (Panel)this.Controls["pnObsCat"];
+        //            CheckBox chBox = ((CheckBox)panel.Controls[values[i]]);
 
-                    chbPhysEx.Checked = bool.Parse(values[0]);
-                    chbClean.Checked = bool.Parse(values[1]);
-                    chbProg.Checked = bool.Parse(values[2]);
-                    chbMeal.Checked = bool.Parse(values[3]);
-                    chbGame.Checked = bool.Parse(values[4]);
-                    chbEng.Checked = bool.Parse(values[5]);
-                }
-            }
-            else
-            {
-                chbPhysEx.Checked = false;
-                chbClean.Checked = false;
-                chbProg.Checked = false;
-                chbGame.Checked = false;
-                chbEng.Checked = false;
-                chbMeal.Checked = false;
-            }
+        //            chbPhysEx.Checked = bool.Parse(values[0]);
+        //            chbClean.Checked = bool.Parse(values[1]);
+        //            chbProg.Checked = bool.Parse(values[2]);
+        //            chbMeal.Checked = bool.Parse(values[3]);
+        //            chbGame.Checked = bool.Parse(values[4]);
+        //            chbEng.Checked = bool.Parse(values[5]);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        chbPhysEx.Checked = false;
+        //        chbClean.Checked = false;
+        //        chbProg.Checked = false;
+        //        chbGame.Checked = false;
+        //        chbEng.Checked = false;
+        //        chbMeal.Checked = false;
+        //    }
         }               
 
         //считывает файл и возвращает массив со значениями

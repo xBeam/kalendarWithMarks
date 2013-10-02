@@ -10,20 +10,12 @@ namespace kalendar_with_marks
 {
     public static class Common
     {
-        public const string Path = "D:\\C#files\\Categories.txt";
+        public const string Path = "F:\\C#files\\Categories.txt";
         //считывает файл категорий в массив
         public static string[] GetCategoryList(string path)
         {
             string[] categories = null;
             string info = string.Empty;
-            DirectoryInfo di = new DirectoryInfo("D:\\C#files");
-            if (!di.Exists)
-                di.Create();
-
-            FileInfo fi = new FileInfo(path);
-            if (!fi.Exists)
-                fi.Create();
-
             using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
             {
                 using (StreamReader sr = new StreamReader(fs))
@@ -37,7 +29,7 @@ namespace kalendar_with_marks
                 categories = new string[0];
             return categories;
         }
-        //Записывает категории из массива в строку, а потом в файл
+        //Записывает категории из массива в строку
         public static void SetCategoryList(string[] categories, string path)
         {
             if (categories != null && categories.Length > 0)
