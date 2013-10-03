@@ -18,7 +18,7 @@ namespace kalendar_with_marks
             DateObserver dateObserver = new DateObserver();
             dateObserver.Show();
             dateObserver.Visible = false;
-            string[] categories = Common.GetCategoryList(Common.Path);
+            List<string> categories = Common.GetCategoryList(Common.Path);
             Common.RenderFromFile(categories, pnCategories);
         }
 
@@ -28,8 +28,7 @@ namespace kalendar_with_marks
             DateObserver dateObs = (DateObserver)Application.OpenForms["DateObserver"];
             dateObs.Visible = true;
             dateObs.RenderTasks(e.End);
-            //asdadsd
-            //Изменения
+           
         }
 
         private void btnAddCateg_Click(object sender, EventArgs e)
@@ -46,9 +45,8 @@ namespace kalendar_with_marks
             delCat.Show();
         }
 
-        public void Otrisovwik(string[] risCat)
+        public void Otrisovwik(List<string> risCat)
         {
-
             Panel pn = ((Panel)this.Controls["pnCategories"]);
             Common.RenderFromFile(risCat, pn);
             pnCategories.Refresh();

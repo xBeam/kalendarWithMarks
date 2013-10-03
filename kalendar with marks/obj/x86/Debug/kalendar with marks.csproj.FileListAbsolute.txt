@@ -10,3 +10,15 @@ C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\
 C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.DateObserver.resources
 C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.AddCateg.resources
 C:\Users\Руслан\documents\visual studio 2010\Projects\kalendar with marks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.DeleteCat.resources
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\bin\Debug\kalendar with marks.exe
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\bin\Debug\kalendar with marks.pdb
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.AddCateg.resources
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.DeleteCat.resources
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.Start.resources
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.DateObserver.resources
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\kalendar_with_marks.Properties.Resources.resources
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\kalendar with marks.exe
+F:\C#files\GitHub\kalendarWithMarks\kalendar with marks\obj\x86\Debug\kalendar with marks.pdb

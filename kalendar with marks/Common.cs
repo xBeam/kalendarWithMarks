@@ -10,13 +10,15 @@ namespace kalendar_with_marks
 {
     public static class Common
     {
-        public const string Path = "D:\\C#files\\Categories.txt";
+        //public const string Path = "F:\\C#files\\Categories.txt";
+        public static readonly string DirectoryPath = Application.StartupPath;
+        public static readonly string Path = string.Format("{0}\\{1}", DirectoryPath, "Categories.txt");
         //считывает файл категорий в массив
-        public static string[] GetCategoryList(string path)
+        public static List<string> GetCategoryList(string path)
         {
-            string[] categories = null;
+            List<string> categories = null;
             string info = string.Empty;
-            DirectoryInfo di = new DirectoryInfo("D:\\C#files");
+            DirectoryInfo di = new DirectoryInfo(DirectoryPath);
             if (!di.Exists)
                 di.Create();
 
@@ -32,20 +34,29 @@ namespace kalendar_with_marks
                 }
             }
             if (!string.IsNullOrEmpty(info))
-                categories = info.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            {
+                string[] tempCategories = info.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                categories = tempCategories.ToList<string>();
+            }
             else
-                categories = new string[0];
+                categories = new List<string>();
             return categories;
         }
         //Записывает категории из массива в строку, а потом в файл
-        public static void SetCategoryList(string[] categories, string path)
+        public static void SetCategoryList(List<string> categories, string path)
         {
-            if (categories != null && categories.Length > 0)
+            if (categories != null && categories.Count > 0)
             {
                 string categoriesInLine = string.Empty;
-                for (int i = 0; i < categories.Length; i++)
+                //for (int i = 0; i < categories.Count; i++)
+                //{
+                //    categoriesInLine += categories[i] + ";";
+                //}
+
+                foreach (string categoryItem in categories)
                 {
-                    categoriesInLine += categories[i] + ";";
+                    categoriesInLine += categoryItem + ";";
+                    //categoriesInLine = string.Format("{0};{1}", categoriesInLine, categoryItem);
                 }
                 using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
@@ -57,18 +68,18 @@ namespace kalendar_with_marks
             }
         }
 
-        public static void RenderFromFile(string[] categories, Panel pnCategories)
+        public static void RenderFromFile(List<string> categories, Panel pnCategories)
         {
             int yStep = 25;
             int xPrimaryLocation = 10;
             int yPrimaryLocation = 10;
 
-            if (categories != null && categories.Length > 0)
+            if (categories != null && categories.Count > 0)
             {
                 if (pnCategories != null)
                     pnCategories.Controls.Clear();
 
-                for (int i = 0; i < categories.Length; i++)
+                for (int i = 0; i < categories.Count; i++)
                 {
                     Label lb = new Label();
                     lb.Name = categories[i];
@@ -84,18 +95,18 @@ namespace kalendar_with_marks
 
         public static void RenderCheckBox(Panel pnDelCat)
         {
-            string[] categories = Common.GetCategoryList(Common.Path);
+            List<string> categories = Common.GetCategoryList(Common.Path);
             int yStep = 25;
             int xPrimaryLocation = 10;
             int yPrimaryLocation = 10;
 
-            if (categories != null && categories.Length > 0)
+            if (categories != null && categories.Count > 0)
             {
                 if (pnDelCat != null)
                 {
                     pnDelCat.Controls.Clear();
                 }
-                for (int i = 0; i < categories.Length; i++)
+                for (int i = 0; i < categories.Count; i++)
                 {
                     CheckBox chb = new CheckBox();
                     chb.Name = categories[i];
@@ -106,6 +117,35 @@ namespace kalendar_with_marks
 
                     pnDelCat.Controls.Add(chb);
                     pnDelCat.Refresh();
+                }
+            }
+        }
+
+        public static void RenderCheckBoxesWithValues(Panel pnCategories, Dictionary<string, bool> checkBoxValueList)
+        {
+            int yStep = 25;
+            int xPrimaryLocation = 10;
+            int yPrimaryLocation = 10;
+
+            if (checkBoxValueList != null && checkBoxValueList.Count > 0)
+            {
+                if (pnCategories != null)
+                    pnCategories.Controls.Clear();
+
+                int rowNumber = 1;
+                foreach (var checkBoxValue in checkBoxValueList)
+                {
+                    CheckBox chb = new CheckBox();
+                    chb.Name = checkBoxValue.Key;
+                    chb.Text = string.Format("{0}. {1}", rowNumber.ToString(), checkBoxValue.Key);
+                    chb.Width = checkBoxValue.Key.Length * 20;
+                    chb.Location = new Point(xPrimaryLocation, yPrimaryLocation);
+                    chb.Checked = checkBoxValue.Value;
+                    yPrimaryLocation += yStep;
+
+                    pnCategories.Controls.Add(chb);
+                    pnCategories.Refresh();
+                    rowNumber++;
                 }
             }
         }

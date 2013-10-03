@@ -21,29 +21,44 @@ namespace kalendar_with_marks
 
         private void btnDelCat_Click(object sender, EventArgs e)
         {
-            string[] categories = Common.GetCategoryList(Common.Path);
-            //string[] delCateg = new string[categories.Length - 1];
+            List<string> categories = Common.GetCategoryList(Common.Path);
+        
             if (categories != null)
             {
-                string[] newList = new string[0];
-                for (int i = 0; i < categories.Length; i++)
+                //List<string> newList = new List<string>();
+                //for (int i = 0; i < categories.Count; i++)
+                //{
+                //    Panel panel = (Panel)this.Controls["pnDelCat"];
+                //    if (panel != null)
+                //    {
+                //        CheckBox chBox = ((CheckBox)panel.Controls[categories[i]]);
+                //        if (chBox != null)
+                //        {
+                //            if (chBox.Checked == false)
+                //            {
+                //                List<string> newAddList = new List<string>();
+                //                newAddList.Add(chBox.Name);
+                //                for (int x = 0; x < newList.Count; x++)
+                //                {
+                //                    newAddList[x] = newList[x];
+                //                }
+                //                newList = newAddList;
+                //            }
+                //        }
+                //    }
+                //}
+
+                List<string> newList = new List<string>();
+                Panel panel = (Panel)this.Controls["pnDelCat"];
+                if (panel != null)
                 {
-                    Panel panel = (Panel)this.Controls["pnDelCat"];
-                    if (panel != null)
+                    foreach (string categoryItem in categories)
                     {
-                        CheckBox chBox = ((CheckBox)panel.Controls[categories[i]]);
+                        CheckBox chBox = (CheckBox)panel.Controls[categoryItem];
                         if (chBox != null)
                         {
-                            if (chBox.Checked == false)
-                            {
-                                string[] newAddList = new string[newList.Length + 1];
-                                newAddList[newAddList.Length - 1] = chBox.Name;
-                                for (int x = 0; x < newList.Length; x++)
-                                {
-                                    newAddList[x] = newList[x];
-                                }
-                                newList = newAddList;
-                            }
+                            if (!chBox.Checked)
+                                newList.Add(chBox.Name);
                         }
                     }
                 }

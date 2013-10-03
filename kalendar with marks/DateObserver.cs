@@ -16,6 +16,7 @@ namespace kalendar_with_marks
         public DateObserver()           
         {
             InitializeComponent();
+            Common.RenderCheckBox(pnCategories);
         }
 
         //поле с выбранной датой
@@ -25,24 +26,33 @@ namespace kalendar_with_marks
         public string Path { get; set; }        
 
         //действие при сохранении
-        private void btnSave_Click(object sender, EventArgs e) 
+        private void btnSave_Click(object sender, EventArgs e)
         {
             if (File.Exists(Path))
             {
                 File.Delete(Path);
             }
 
-            using (FileStream fs = File.Create(Path))
+            Panel panel = (Panel)this.Controls["pnCategories"];
+            if (panel != null)
             {
-                AddText(fs, "1 - " + chbPhysEx.Checked.ToString());
-                AddText(fs, "\n2 - " + chbClean.Checked.ToString());
-                AddText(fs, "\n3 - " + chbProg.Checked.ToString());
-                AddText(fs, "\n4 - " + chbMeal.Checked.ToString());
-                AddText(fs, "\n5 - " + chbGame.Checked.ToString());
-                AddText(fs, "\n6 - " + chbEng.Checked.ToString());
+                List<string> categories = Common.GetCategoryList(Common.Path);
+                if (categories != null)
+                {
+                    using (FileStream fs = File.Create(Path))
+                    {
+                        foreach (string categoryItem in categories)
+                        {
+                            CheckBox chBox = (CheckBox)panel.Controls[categoryItem];
+                            if (chBox != null)
+                                AddText(fs, string.Format("{0}+{1};", categoryItem, chBox.Checked.ToString()));
+                        }
+                    }
+
+                }
+                MessageBox.Show("Успешно сохранено", "Сохранение...", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            MessageBox.Show("Успешно сохранено", "Сохранение...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }       
+        }      
 
         /// <summary>
         /// считывание информации по дате и ее отображение
@@ -53,48 +63,41 @@ namespace kalendar_with_marks
             ChosenDate = chosenDate;
             lblDate.Text = ChosenDate.ToShortDateString();
             Path = string.Format(@"f:\C#files\KalendarSaved{0}.txt", ChosenDate.ToShortDateString());
-            string[] values = null;
+            Dictionary<string, bool> checkBoxesValues = null;
             if (File.Exists(Path))
             {
                 using (FileStream rd = new FileStream(Path, FileMode.Open))
                 {
-                    values = Reader(rd);
-
-                    chbPhysEx.Checked = bool.Parse(values[0]);
-                    chbClean.Checked = bool.Parse(values[1]);
-                    chbProg.Checked = bool.Parse(values[2]);
-                    chbMeal.Checked = bool.Parse(values[3]);
-                    chbGame.Checked = bool.Parse(values[4]);
-                    chbEng.Checked = bool.Parse(values[5]);
+                    checkBoxesValues = Reader(rd);
+                    if (checkBoxesValues != null)
+                        Common.RenderCheckBoxesWithValues(pnCategories, checkBoxesValues);
                 }
             }
             else
-            {
-                chbPhysEx.Checked = false;
-                chbClean.Checked = false;
-                chbProg.Checked = false;
-                chbGame.Checked = false;
-                chbEng.Checked = false;
-                chbMeal.Checked = false;
-            }
+                Common.RenderCheckBox(pnCategories);
         }               
 
         //считывает файл и возвращает массив со значениями
-        private static string[] Reader(FileStream fs)
+        private static Dictionary<string, bool> Reader(FileStream fs)
         {
             string tasks = string.Empty;
+            Dictionary<string, bool> chbValues = new Dictionary<string, bool>();
             using (fs)
             {
                 using (StreamReader sr = new StreamReader(fs))
                 {
                     tasks = sr.ReadToEnd();
                 }
-                string[] taskARRAY = tasks.Split('\n');
-                for (int i = 0; i < taskARRAY.Length; i++)
+
+                string[] taskArray = tasks.Split(new char[] {';'}, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < taskArray.Length; i++)
                 {
-                    taskARRAY[i] = taskARRAY[i].Substring(taskARRAY[i].IndexOf('-') + 1).Trim();
+                    string[] keyValuePair = taskArray[i].Split('+');
+                    if (keyValuePair != null && keyValuePair.Length == 2)
+                        chbValues[keyValuePair[0]] = bool.Parse(keyValuePair[1]);
                 }
-                return taskARRAY;
+
+                return chbValues;
             }
         }           
 

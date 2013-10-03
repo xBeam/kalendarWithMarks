@@ -21,18 +21,20 @@ namespace kalendar_with_marks
             if (string.IsNullOrEmpty(tbNameCateg.Text))
                 this.Close();
             
-            string[] categories = Common.GetCategoryList(Common.Path);
+            List<string> categories = Common.GetCategoryList(Common.Path);
             if (categories != null)
             {
-                string[] addCateg = new string[categories.Length + 1];
-                for (int i = 0; i < categories.Length; i++)
-                {
-                    addCateg[i] = categories[i];
-                }
-                addCateg[addCateg.Length - 1] = tbNameCateg.Text;
+                //List<string> addCateg = new List<string>(categories.Count + 1);
+                //for (int i = 0; i < categories.Count; i++)
+                //{
+                //    addCateg[i] = categories[i];
+                //}
+                //addCateg.Add(tbNameCateg.Text);
 
-                Common.SetCategoryList(addCateg, Common.Path);
-                ((Start)Application.OpenForms["Start"]).Otrisovwik(addCateg);
+                categories.Add(tbNameCateg.Text);
+
+                Common.SetCategoryList(categories, Common.Path);
+                ((Start)Application.OpenForms["Start"]).Otrisovwik(categories);
                 this.Close();
             }
         }
